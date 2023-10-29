@@ -2,13 +2,38 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Введите количество уравнений: ");
-        int equations = scanner.nextInt();
+        int equations;
+        while (true) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                equations = scanner.nextInt();
+                if (equations >= 1) {
+                    break;
+                } else {
+                    System.out.println("Введены некорректные данные, нужно ввести целое число, больше или равное 1 ");
+                }
+            } catch (Exception e) {
+                System.out.println("Введены некорректные данные, нужно ввести целое число, больше или равное 1");
+            }
+        }
 
         System.out.println("Введите количество неизвестных: ");
-        int unknowns = scanner.nextInt();
+        int unknowns;
+        while (true) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                unknowns = scanner.nextInt();
+                if (unknowns >= 1) {
+                    break;
+                } else {
+                    System.out.println("Введены некорректные данные, нужно ввести целое число, больше или равное 1 ");
+                }
+            } catch (Exception e) {
+                System.out.println("Введены некорректные данные, нужно ввести целое число, больше или равное 1");
+            }
+        }
 
         double[][] matrix = new double[equations][unknowns + 1];
 
@@ -18,6 +43,7 @@ public class Main {
                 System.out.println("Введите элемент: [" + i + "][" + j + "]");
                 while (true) {
                     try {
+                        Scanner scanner = new Scanner(System.in);
                         matrix[i][j] = scanner.nextDouble();
                         break;
                     } catch (Exception e) {
@@ -26,8 +52,6 @@ public class Main {
                 }
             }
         }
-
-        scanner.close();
 
         if (solveGauss(matrix)) {
             System.out.println("Решение СЛАУ:");
